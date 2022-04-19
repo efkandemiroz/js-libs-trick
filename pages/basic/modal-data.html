@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Tablodan Modal'a Data Gönderme</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../../index.html">Anasayfa</a>
+        </li>
+    </ul>
+    <div class="rows">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Adınız</th>
+                <th scope="col">Soyad</th>
+                <th scope="col">Meslek</th>
+                <th scope="col">Mail Adresi</th>
+                <th scope="col">İşlem</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Efkan</td>
+                <td>Demiröz</td>
+                <td>Yazılım Geliştirici</td>
+                <td>efkandemiroz@gmail.com</td>
+                <td><div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#duzenleModal" data-ad="Efkan" data-soyad="Demiröz" data-meslek="Yazılım Geliştirici" data-mail="efkandemiroz@gmail.com">Düzenle</button>
+                </div></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Örnek</td>
+                <td>Kullanıcı</td>
+                <td>Software Developer</td>
+                <td>info@ornekkullanici.com</td>
+                <td><div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#duzenleModal" data-ad="Örnek" data-soyad="Kullanıcı" data-meslek="Software Developer" data-mail="info@ornekkullanici.com">Düzenle</button>
+                </div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-warning" role="alert">
+        Örnek olması için data etiketi ile veriler tek tek eklenmiştir. Sadece id datası ileterek ajax sorgusu ile ilgili verilerinizi getirip modal içinde gösterebilirsiniz.
+    </div>
+
+</div>
+<!--Düzenle Modal-->
+
+<div class="modal fade" id="duzenleModal" tabindex="-1" aria-labelledby="duzenleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="duzenleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="txtAd" class="form-label">Ad</label>
+                        <input type="text" class="form-control" id="txtAd" aria-describedby="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtSoyad" class="form-label">Soyad</label>
+                        <input type="text" class="form-control" id="txtSoyad" aria-describedby="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtMail" class="form-label">Mail Adresi</label>
+                        <input type="email" class="form-control" id="txtMail" aria-describedby="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtMeslek" class="form-label">Meslek</label>
+                        <input type="text" class="form-control" id="txtMeslek" aria-describedby="">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+<script>
+    $(document).ready(function () {
+        $('#duzenleModal').on('show.bs.modal', function (event) {
+            var gelenData = $(event.relatedTarget);
+
+            var ad = gelenData.data('ad');
+            var soyad = gelenData.data('soyad');
+            var meslek = gelenData.data('meslek');
+            var mail = gelenData.data('mail');
+
+            // Gerekirse, burada bir AJAX isteği başlatabilirsiniz.
+            // Örnek olması için data etiketi ile veriler tek tek eklenmiştir. Sadece id datası ileterek ajax sorgusu ile ilgili verilerinizi getirip modal içinde gösterebilirsiniz.
+            $('#txtMail').val(mail);
+            $('#txtAd').val(ad);
+            $('#txtSoyad').val(soyad);
+            $('#txtMeslek').val(meslek);
+            var modal = $(this);
+
+            modal.find('.modal-title').text('Kullanıcı:  ' + ad +' '+soyad +' - Detayları');
+
+        });
+    });
+</script>
+</body>
+</html>
